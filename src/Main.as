@@ -1,7 +1,9 @@
-package 
+package
 {
+	import com.gypark.gameoflife.data.DataManager;
 	import com.gypark.gameoflife.display.Display;
 	import com.gypark.gameoflife.game.Game;
+	import com.gypark.gameoflife.util.URL;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
@@ -9,52 +11,44 @@ package
 	 * ...
 	 * @author gypark
 	 */
-	[SWF(width='400', height='400')]
-	public class Main extends Sprite 
+	[SWF(width='760',height='760')]
+	
+	public class Main extends Sprite
 	{
 		private var game:Game = Game.INSTANCE;
 		private var display:Display = Display.INSTANCE;
+		private var data:DataManager = DataManager.INSTANCE;
 		
-		public function Main():void 
+		public function Main():void
 		{
-			if (stage) init();
-			else addEventListener(Event.ADDED_TO_STAGE, init);
+			if (stage)
+				init();
+			else
+				addEventListener(Event.ADDED_TO_STAGE, init);
 		}
 		
-		private function init(e:Event = null):void 
+		private function init(e:Event = null):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			// entry point
 			
-			setDisplay();
-			setGame();
-			setInitialState();
+			data.loaded.addOnce(onMapLoaded);
+			data.loadMap();
+			
+			function onMapLoaded():void
+			{
+				setDisplay();
+				setGame();
+				setInitialState();
+			}
 		}
 		
-		private function setInitialState():void
-		{
-			display.interactionLayer.onCellDataUpdate(
-				game.makeCellList( [[0, 1, 0, 0, 0, 0, 0, 0, 0, 0], 
-								    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0], 
-								    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-								    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]] 
-				)
-			);
-		}
-		
-		private function setDisplay():void 
+		private function setDisplay():void
 		{
 			addChild(display);
 			setCenter();
-			display.interactionLayer.started.add(game.onStartButton);
-			display.interactionLayer.started.add(display.dataDisplayLayer.onStartButton);
-			
+			display.gui.started.add(game.onStartButton);
+			 
 			function setCenter():void
 			{
 				display.x = (stage.stageWidth - display.width) / 2;
@@ -62,11 +56,15 @@ package
 			}
 		}
 		
-		private function setGame():void 
+		private function setInitialState():void
+		{
+			display.interactionLayer.onCellDataUpdate(data.mapDataMap[URL.URL_MAP_GLIDER]);
+		}
+		
+		private function setGame():void
 		{
 			game.dataChanged.add(display.interactionLayer.onCellDataUpdate);
-			game.dataChanged.add(display.dataDisplayLayer.onCellDataUpdate);
 		}
 	}
-	
+
 }

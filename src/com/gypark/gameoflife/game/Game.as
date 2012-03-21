@@ -1,5 +1,6 @@
 package com.gypark.gameoflife.game 
 {
+	import com.gypark.gameoflife.display.layer.InteractionLayer;
 	import com.gypark.gameoflife.game.rule.LiveRule;
 	import com.gypark.gameoflife.game.rule.NeighborRule;
 	import com.gypark.gameoflife.game.state.CellState;
@@ -15,8 +16,8 @@ package com.gypark.gameoflife.game
 	public final class Game 
 	{
 		static public const INSTANCE:Game = new Game();
-		public const WIDTH:int  = 10;
-		public const HEIGHT:int = 10;
+		public const WIDTH:int  = 50;
+		public const HEIGHT:int = 50;
 		public const dataChanged:Signal = new Signal();
 		private var cellList:Array/*ACell*/;
 		private var timer:Timer;
@@ -54,23 +55,23 @@ package com.gypark.gameoflife.game
 			return cellList;
 		}
 		
-		public function onStartButton(isStarted:Boolean, cellMap:Array):void 
+		public function onStartButton(isStarted:Boolean):void 
 		{
 			if(isStarted) {
-				makeCellList(cellMap);
-				start();
+				makeCellList(InteractionLayer.INSTANCE.makingCellMap());
+				startTimer();
 			}
 			else {
-				stop();
+				stopTimer();
 			}
 			
-			function start():void 
+			function startTimer():void 
 			{
 				timer.start();
 				dataChanged.dispatch(cellList);
 			}
 			
-			function stop():void
+			function stopTimer():void
 			{
 				timer.stop();
 				dataChanged.dispatch(cellList);

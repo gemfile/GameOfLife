@@ -39,7 +39,7 @@ package com.gypark.gameoflife.display.layer
 			}
 		}
 		
-		public function onStartButton(isStarted:Boolean, cellMap:Array):void 
+		public function onStartButton(isStarted:Boolean):void 
 		{
 			visible = isStarted;
 		}

@@ -1,6 +1,6 @@
 package com.gypark.gameoflife.display 
 {
-	import com.gypark.gameoflife.display.layer.DataDisplayLayer;
+	import com.gypark.gameoflife.display.layer.GUI;
 	import com.gypark.gameoflife.display.layer.InteractionLayer;
 	import flash.display.Sprite;
 	/**
@@ -11,7 +11,7 @@ package com.gypark.gameoflife.display
 	{
 		public static const INSTANCE:Display = new Display();
 		public const interactionLayer:InteractionLayer = InteractionLayer.INSTANCE;
-		public const dataDisplayLayer:DataDisplayLayer = DataDisplayLayer.INSTANCE;
+		public const gui:GUI = GUI.INSTANCE;
 		
 		public function Display() 
 		{
@@ -20,13 +20,12 @@ package com.gypark.gameoflife.display
 			}
 			
 			init();
-			
 		}
 		
 		private function init():void 
 		{
 			addChild(interactionLayer);
-			addChild(dataDisplayLayer);
+			addChild(gui);
 		}
 	}
 }
