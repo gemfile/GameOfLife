@@ -1,6 +1,6 @@
 package com.gypark.gameoflife.game 
 {
-	import com.gypark.gameoflife.display.layer.InteractionLayer;
+	import com.gypark.gameoflife.display.layer.CellLayer;
 	import com.gypark.gameoflife.game.rule.LiveRule;
 	import com.gypark.gameoflife.game.rule.NeighborRule;
 	import com.gypark.gameoflife.game.state.CellState;
@@ -58,7 +58,7 @@ package com.gypark.gameoflife.game
 		public function onStartButton(isStarted:Boolean):void 
 		{
 			if(isStarted) {
-				makeCellList(InteractionLayer.INSTANCE.makingCellMap());
+				makeCellList(CellLayer.INSTANCE.makingCellMap());
 				startTimer();
 			}
 			else {

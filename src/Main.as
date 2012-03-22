@@ -46,24 +46,18 @@ package
 		private function setDisplay():void
 		{
 			addChild(display);
-			setCenter();
 			display.gui.started.add(game.onStartButton);
-			 
-			function setCenter():void
-			{
-				display.x = (stage.stageWidth - display.width) / 2;
-				display.y = (stage.stageHeight - display.height) / 2;
-			}
+			display.gui.selected.add(display.cellLayer.onCellDataUpdate);
 		}
 		
 		private function setInitialState():void
 		{
-			display.interactionLayer.onCellDataUpdate(data.mapDataMap[URL.URL_MAP_GLIDER]);
+			display.cellLayer.onCellDataUpdate(data.mapDataMap[URL.URL_MAP_GLIDER]);
 		}
 		
 		private function setGame():void
 		{
-			game.dataChanged.add(display.interactionLayer.onCellDataUpdate);
+			game.dataChanged.add(display.cellLayer.onCellDataUpdate);
 		}
 	}
 
