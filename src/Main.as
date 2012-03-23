@@ -46,8 +46,8 @@ package
 		private function setDisplay():void
 		{
 			addChild(display);
-			display.gui.started.add(game.onStartButton);
-			display.gui.selected.add(display.cellLayer.onCellDataUpdate);
+			display.guiLayer.started.add(game.onStartButton);
+			display.guiLayer.selected.add(display.cellLayer.onCellDataUpdate);
 		}
 		
 		private function setInitialState():void

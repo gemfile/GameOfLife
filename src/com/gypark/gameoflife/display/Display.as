@@ -1,7 +1,7 @@
 package com.gypark.gameoflife.display 
 {
 	import com.gypark.gameoflife.display.layer.CellLayer;
-	import com.gypark.gameoflife.display.layer.GUI;
+	import com.gypark.gameoflife.display.layer.GUILayer;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	/**
@@ -12,7 +12,7 @@ package com.gypark.gameoflife.display
 	{
 		public static const INSTANCE:Display = new Display();
 		public const cellLayer:CellLayer = CellLayer.INSTANCE;
-		public const gui:GUI = GUI.INSTANCE;
+		public const guiLayer:GUILayer = GUILayer.INSTANCE;
 		
 		public function Display() 
 		{
@@ -26,7 +26,7 @@ package com.gypark.gameoflife.display
 		private function init():void 
 		{
 			addChild(cellLayer);
-			addChild(gui);
+			addChild(guiLayer);
 			
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 		}
@@ -37,6 +37,8 @@ package com.gypark.gameoflife.display
 			
 			cellLayer.x = (stage.stageWidth - width) / 2;
 			cellLayer.y = (stage.stageHeight - height) / 2;
+			guiLayer.x = 80;
+			guiLayer.y = 20;
 		}
 	}
 }
