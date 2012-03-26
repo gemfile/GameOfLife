@@ -52,12 +52,13 @@ package com.gypark.gameoflife.display.cell
 		{
 			buttonMode = true;
 			graphics.clear();
-			graphics.lineStyle(1, 0xff000000);
+			graphics.lineStyle(1, 0x00999999);
 			if(isToggleON) {
-				graphics.beginFill(0x00000000);
+				graphics.beginFill(0x00666666);
+				//graphics.beginFill(0x00cccc33);
 			}
 			else {
-				graphics.beginFill(0x00ffffff);
+				graphics.beginFill(0x00CCCCCC);
 			}
 			
 			graphics.drawRect(0, 0, cellWidth, cellHeight);
